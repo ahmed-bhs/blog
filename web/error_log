@@ -1,0 +1,14 @@
+[02-Oct-2016 01:41:22 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'Polytechnique1@'@'ip-160-153-128-44.ip.secureserver.net' (using password: NO)' in /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:43
+Stack trace:
+#0 /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php(43): PDO->__construct('mysql:host=160....', 'Polytechnique1@', NULL, Array)
+#1 /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOMySql/Driver.php(45): Doctrine\DBAL\Driver\PDOConnection->__construct('mysql:host=160....', 'Polytechnique1@', NULL, Array)
+#2 /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php(360): Doctrine\DBAL\Driver\PDOMySql\Driver->connect(Array, 'Polytechnique1@', NULL, Array)
+#3 /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php(429): Doctrine\DBAL\Connection->connect()
+#4 /home/coloraxia/public_html/f/vendor/doctrine/db in /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/AbstractMySQLDriver.php on line 103
+[02-Oct-2016 01:41:26 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'Polytechnique1@'@'ip-160-153-128-44.ip.secureserver.net' (using password: NO)' in /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:43
+Stack trace:
+#0 /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php(43): PDO->__construct('mysql:host=160....', 'Polytechnique1@', NULL, Array)
+#1 /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOMySql/Driver.php(45): Doctrine\DBAL\Driver\PDOConnection->__construct('mysql:host=160....', 'Polytechnique1@', NULL, Array)
+#2 /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php(360): Doctrine\DBAL\Driver\PDOMySql\Driver->connect(Array, 'Polytechnique1@', NULL, Array)
+#3 /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php(429): Doctrine\DBAL\Connection->connect()
+#4 /home/coloraxia/public_html/f/vendor/doctrine/db in /home/coloraxia/public_html/f/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/AbstractMySQLDriver.php on line 103

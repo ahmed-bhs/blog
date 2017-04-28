@@ -1,0 +1,50 @@
+<?php
+namespace Utilisateurs\UtilisateursBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="utilisateurs")
+ */
+class Utilisateurs extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+    * @ORM\OneToOne(targetEntity="Utilisateurs\UtilisateursBundle\Entity\Imageuser", cascade={"persist"})
+    */
+    private $imageuser;
+
+
+     /** @ORM\Column(name="facebook_id", type="string", length=255, nullable=true) */
+    protected $facebook_id;
+ 
+    /** @ORM\Column(name="google_id", type="string", length=255, nullable=true) */
+    protected $google_id;
+  
+    
+
+
+          public function setImageuser(Imageuser $imageuser = null)
+  {
+    $this->imageuser = $imageuser;
+  }
+
+  public function getImageuser()
+  {
+    return $this->imageuser;
+  }
+
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}

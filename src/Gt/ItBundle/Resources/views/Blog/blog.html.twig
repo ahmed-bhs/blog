@@ -1,0 +1,562 @@
+{% extends "::modulesUsed/bloglayout.html.twig" %}
+
+  {% block body %}
+
+
+
+
+
+    <!-- Load Facebook SDK for JavaScript -->
+    
+
+
+   <div id="header" style="background-position: 50% 0%; <br />
+
+" data-stellar-background-ratio="0.5"><div id="carousel-example-1" class="carousel slide" data-ride="carousel">
+    <!-- Indicators --><div id="social" class="visible-lg">
+            <ul class="social-icons pull-right hidden-xs">
+                <li class="social-rss">
+                    <a href="#" target="_blank" title="RSS"></a>
+                </li>
+                <li class="social-twitter">
+                    <a href="#" target="_blank" title="Twitter"></a>
+                </li>
+                <li class="social-facebook">
+                    <a href="#" target="_blank" title="Facebook"></a>
+                </li>
+                <li class="social-googleplus">
+                    <a href="#" target="_blank" title="GooglePlus"></a>
+                </li>
+            </ul>
+        </div>
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-1" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-1" data-slide-to="1"></li>
+        <li data-target="#carousel-example-1" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active"><img src="{{asset('blog.PNG')}}"></div>
+        <div class="item"><img src="{{asset('blog.PNG')}}"></div>
+        <div class="item"><img src="{{asset('blog.PNG')}}"></div>
+    </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-1" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-1" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+  
+
+            
+        </div>
+        <!-- End Header -->
+        <!-- === END HEADER === -->
+        <!-- === BEGIN CONTENT === -->
+        <div id="content">
+            <div class="container background-white">
+                <div class="row margin-vert-30">
+                    <!-- Main Column -->
+
+                    {% for flashMessage in app.session.flashbag.get('success') %}
+  <div class="alert alert-warning fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+   {{ flashMessage }}
+  </div>
+       
+                
+              </div>
+   
+      
+      {% endfor %}
+                    <div class="col-md-9">
+                        <!-- Blog Post -->
+                        <br>
+
+
+
+{% for item in advert %}
+    <script>
+    $(function(){ 
+        var pageID = {{ item.id }}; 
+
+        $('#a{{item.id}}').click(function(){
+            $('#b{{item.id}}').removeClass('dislike-h');    
+            $(this).addClass('like-h');
+            $.ajax({
+                type:"POST",
+                url:"ajax.php",
+                data:'act=like&pageID='+pageID,
+                success: function(){
+                }
+            });
+        });
+        $('#b{{item.id}}').click(function(){
+            $('#a{{item.id}}').removeClass('like-h');
+            $(this).addClass('dislike-h');
+            $.ajax({
+                type:"POST",
+                url:"ajax.php",
+                data:'act=dislike&pageID='+pageID,
+                success: function(){
+                }
+            });
+        });
+        $('.share-btn').click(function(){
+            $('.share-cnt').toggle();
+        });
+    });
+</script>
+
+                        <div class="blog-post padding-bottom-20"  >
+                            <!-- Blog Item Header -->
+                            <div class="blog-post-date pull-left">
+                                <span class="day">{{item.date |date(" d")}}</span>
+                                <span class="month">{{item.date |date("M")}}</span>
+                                <br>
+                                <span class="year">{{item.date |date("Y")}}</span>
+                            </div>
+                            
+                            <!-- End Blog Item Header -->
+                            <!-- Blog Item Body -->
+                             <div class="panel panel-white post panel-shadow">
+                <div class="post-heading">
+                    <div class="pull-left image">
+
+                        <img src="{{ asset('/../web/images/') ~ item.author.image }}" class="img-circle avatar" alt="user profile image">
+                    </div>
+
+
+
+                    <div class="pull-left meta">
+                        <div class="title h5">
+                          
+                                        <i class="fa fa-user color-gray-light"></i>
+                                       <a href="#"><strong><b><font color="#001f3f">{{item.author}}</font></b></strong></a>
+                            uploaded  about <strong><b><font color="#001f3f">{{item.title}}</font></b></strong>
+                        </div>
+ 
+                     <h6 class="text-muted time">   <i class="fa fa-calendar color-gray-light">  </i>  {{ item.date|date|ago}}  </h6> 
+
+
+
+
+
+      
+
+
+
+  <div class="blog-post-details">
+                                    <!-- Author Name -->
+                                   
+                                    <!-- End Author Name -->
+                                   
+                                    <!-- End Date -->
+                                    <!-- Tags -->
+                         
+</div>
+
+
+
+
+
+
+
+
+                    </div>
+                </div> 
+                <div class="post-image">
+                              
+                  <img src="{{ ('/uploads/images/product/'  ~ item.image.image) | imagine_filter('o') }}" class="image">
+                </div> <div  id="t1">
+ <!--   <div class="tab-cnt"> -->
+        
+
+        <div >{% if(arr[item.id]['5'] == 1) %}
+            <div  id ="a{{item.id}}" class="like-btn {{ 'like-h'}}">Like</div> {% else %}  <div id ="a{{item.id}}" class="like-btn ">Like</div>{% endif %}
+                
+
+
+                {% if(arr[item.id]['6'] == 1) %}
+            <div id ="b{{item.id}}" class="dislike-btn {{ 'dislike-h'}} "></div> {% else %}  <div id ="b{{item.id}}" class="dislike-btn "></div>{% endif %}
+        
+
+            <div class="share-btn">Share</div>
+
+            <div class="stat-cnt">
+                <div class="rate-count">{{ arr[item.id]['2']}}</div>
+                <div class="stat-bar">
+                    <div class="bg-green" style="width:{{ arr[item.id]['3']}}px"></div>
+                    <div class="bg-red" style="width:{{ arr[item.id]['4']}}px"></div>
+                </div><!-- stat-bar -->
+                <div class="dislike-count">{{ arr[item.id]['1'] }}</div>
+                <div class="like-count">{{ arr[item.id]['0'] }}</div>
+            </div><!-- /stat-cnt -->
+        </div><!-- /tab-tr -->
+       <div class="share-cnt" onclick=" display: block;">
+
+            <!-- AddThis Button BEGIN -->
+            <div class="addthis_toolbox addthis_default_style ">
+            <a class="addthis_button_linkedin_counter"></a>
+
+          
+            <a class="addthis_button_tweet"></a>
+    
+            
+            <a class="addthis_counter addthis_pill_style"></a>
+            </div>
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5174d2b853d85895"></script>
+            <!-- AddThis Button END -->
+
+        </div></div><br>
+
+
+        
+                <div class="post-description">
+                  
+                  <div >
+        
+       
+        <!-- /share
+
+  <h4 class="font-semibold">{{item.title}}</h4>
+    <!-- Load Facebook SDK for JavaScript -->
+    
+
+
+
+
+            
+        </div></p>  
+
+
+
+                        <div id="comment{{item.id}}"></div> 
+                    <div class="stats">
+                     
+                    </div><div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last">
+                                        <a href="">
+                                            <i class="fa fa-comments color-gray-light"></i>
+                                     {% set a = 0 %}   {% for c in comment %} {% if c.blog | trans == item.id  | trans %}  {% set a = a+1 %} {% endif %}  {% endfor %}{{ a }}     Comments  <i class="fa fa-angle-double-right"></i>
+                      
+                                        </a>        
+                                        <i class="fa fa-tag color-gray-light"></i>
+                                                         {% for tags in item.tag %}
+     <a href="#"> {{ tags.name }}</a>,  
+  
+  {% endfor %} 
+                                    
+                                    </div> 
+                </div>
+    
+                <div class="post-footer"> 
+
+                    <form method="POST" action="{{ path('gt_it_blog',{'page' : app.request.get('page')}) }}">
+                    <div class="input-group">
+<input type="hidden" value="{{item.id}}" name="id">
+<input type="hidden" value="comment{{item.id}}" name="div">
+                     
+
+      <input type="text" class="form-control" name="comment" placeholder="Write a comment...">
+      <span class="input-group-btn">
+       <input class="btn btn-secondary" type="submit" value="OK!">
+      </span>
+    
+
+                    </div> 
+                </form>
+   <div class="panel-group wrap" id="accordion" >
+     
+      <!-- end of panel -->
+    <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title" >
+        <a class="collapsed" role="button"  data-toggle="collapse" data-parent="#accordion" href="#collapseTwo{{item.id}}" aria-expanded="false" aria-controls="collapseTwo">
+     <font color="#85144b"> <strong>{% set a = 0 %}   {% for c in comment %} {% if c.blog | trans == item.id | trans %}  {% set a = a+1 %} {% endif %}  {% endfor %} {{ a }} Comments</strong></font>
+        </a>
+      </h4>
+    
+        </div>
+
+
+
+
+
+
+        <div id="collapseTwo{{item.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+
+
+
+
+
+ {% for c in comment %}
+         {% if c.blog | trans == item.id | trans %}
+   <div >  
+<ul class="comments-list" >
+                    <li class="comment" >
+                            <a class="pull-left" href="#">
+                              {% if     c.user != NULL %}
+                                <img class="avatar" src="{{asset(c.user.image) }}" alt="avatar"> {% else %}<img  class="avatar"  src="{{ asset('an.png') }}" alt=""> {% endif %}
+
+                            </a>
+                            <div class="comment-body">
+                                <div class="comment-heading">
+                                  {% if     c.user != NULL %}    <h4 class="user">{{c.user.username |capitalize }}</h4> {% else %}
+                                  <h4 class="user">{{c.name |capitalize }}</h4>    {% endif %} <h5 class="time">{{ c.date|date|ago}}</h5> 
+                              
+                                    <h5 class="time"></h5>
+                                </div>
+                                <p>{{c.comment}}</p> 
+                            </div>
+                        </li>
+                       
+                    </ul> </div>    {% set a = a + 1 %}
+                  {% endif %}
+
+         {% endfor %}  
+
+        
+        </div>
+      </div>
+
+
+ </div> 
+      
+  </div>
+ 
+              </div>         
+            </div>   
+</div>  
+{% endfor %}
+    
+
+          
+                      
+
+
+
+
+
+
+
+<div class="navigation" >
+   {{ knp_pagination_render(advert) }}
+</div>
+ 
+                    </div>
+                    <!-- End Main Column -->
+                    <!-- Side Column --><div class="col-md-3">
+                        <!-- Blog Tags -->
+                        <div class="blog-tags">
+                            <h3>Tags</h3>
+                            <ul class="blog-tags">
+                              {% for tag in tags %}
+                                
+                             
+                                <li>
+                                    <a href="#{{tag.id}}" class="blog-tag" size="5px"><font color="#001f3f" size="3.5px">{{tag.name |capitalize}}</font></a>
+                                </li>
+                               {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- End Blog Tags -->
+                        <!-- Recent Posts --><div class="archives">
+                            <h3>Archives</h3>
+                        <ul>
+                            <li><a href="#">November,2013</a></li>
+                            <li><a href="#">May,2013</a></li>
+                            <li><a href="#">April,2013</a></li>
+                            <li><a href="#">June,2013</a></li>
+                            <li><a href="#">August,2013</a></li>
+                            <li><a href="#">January,2013</a></li>
+                        </ul>
+                        </div>
+                        <br>
+                        <div class="recent-posts">
+                            <h3>Recent Posts</h3>
+                            <ul class="posts-list margin-top-10">
+                                   
+
+                                {% for item in advert %}
+
+               
+        
+                                <li>
+  
+                                                              <div class="recent-post">
+                                        <a href="">
+                                            <img class="pull-left" src="{{('uploads/images/product/' ~ item.image.image)|imagine_filter('t')}}" alt="thumb1">
+                                        </a>
+                                        <a href="#" class="posts-list-title">{{item.title |capitalize}}</a>
+                                        <br>
+                                        <span class="recent-post-date">
+                                                     {{item.date|date('d/M/Y')}}
+                                        </span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </li>
+{% endfor %}
+                            </ul>
+                        </div>
+                        <!-- End Recent Posts -->
+                    </div>
+                   
+
+
+
+
+
+                    <!-- End Side Column -->
+                </div>
+            </div>
+        </div>
+        <!-- === END CONTENT === -->
+        <!-- === BEGIN FOOTER === -->
+        <div id="base" class="background-dark text-light">
+            <div class="container padding-vert-30">
+                <div class="row">
+                    <!-- Disclaimer -->
+                    <div class="col-md-6 margin-bottom-30">
+                        <h3 class="margin-bottom-10">Disclaimer</h3>
+                        <p>All stock images on this template demo are for presentation purposes only, intended to represent a live site and are not included with the template or in any of the Joomla51 club membership plans.</p>
+                        <p>Dribbble images are property of their respective owners. All other images are freely available from
+                            <a class="nobold" href="http://www.unsplash.com/" target="_blank">Unsplash</a>.</p>
+                    </div>
+                    <!-- End Disclaimer -->
+                    <!-- Image Credits -->
+                    <div class="col-sm-6 col-md-3 margin-bottom-30">
+                        <h3 class="margin-bottom-10">Image Credits</h3>
+                        <ul class="menu">
+                            <li>
+                                <a href="http://www.coffeeandplaid.com/" target="_blank">Coffee & Plaid</a>
+                            </li>
+                            <li>
+                                <a href="https://dribbble.com/OMFGdesign" target="_blank">Olly Freeman</a>
+                            </li>
+                            <li>
+                                <a href="https://dribbble.com/artnok" target="_blank">Niko Picard</a>
+                            </li>
+                            <li>
+                                <a href="https://dribbble.com/forsuregraphic" target="_blank">Forsuregraphic</a>
+                            </li>
+                            <li>
+                                <a href="https://www.unsplash.com" target="_blank">Unsplash</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- End Image Credits -->
+                    <!-- Friends -->
+                    <div class="col-sm-6 col-md-3 margin-bottom-30">
+                        <h3 class="margin-bottom-10">Friends</h3>
+                        <ul class="menu">
+                            <li>
+                                <a href="#">Amanda Allen</a>
+                            </li>
+                            <li>
+                                <a href="#">John Adams</a>
+                            </li>
+                            <li>
+                                <a href="#">Mark Sanchez</a>
+                            </li>
+                            <li>
+                                <a href="#">Diane Reed</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- End Friends -->
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div id="footer" class="background-dark text-light">
+            <div class="container no-padding">
+                <div class="row">
+                    <!-- Footer Menu -->
+                    <div id="footermenu" class="col-md-8">
+                        <ul class="list-unstyled list-inline">
+                            <li>
+                                <a href="#" target="_blank">Sample Link</a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">Sample Link</a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">Sample Link</a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">Sample Link</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End Footer Menu -->
+                    <!-- Copyright -->
+                    <div id="copyright" class="col-md-4">
+                        <p class="pull-right">(c) 2016 Your Copyright Info</p>
+                    </div>
+                    <!-- End Copyright -->
+                </div>
+            </div>
+
+
+  {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

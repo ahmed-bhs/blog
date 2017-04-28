@@ -1,0 +1,9 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+{% include "FOSUserBundle:Profile:show_content.html.twig" %}
+
+<pre width="10"><img class="avatar" alt="avatar" src="{{(user.profilePicturePath)|imagine_filter('o') }} "></pre>
+
+<br><br>
+{% endblock fos_user_content %}
